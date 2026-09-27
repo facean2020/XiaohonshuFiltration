@@ -1,0 +1,24 @@
+# Local examples and temporary files
+temp/
+
+# macOS
+.DS_Store
+
+# Xcode user-specific data
+xcuserdata/
+*.xcuserstate
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Xcode build output
+build/
+DerivedData/
+
+# Swift Package Manager
+.build/
+
+# Dependency manager build output
+Carthage/Build/
+Pods/

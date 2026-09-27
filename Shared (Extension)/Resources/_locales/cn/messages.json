@@ -4,7 +4,8 @@
         "description": "The display name for the extension."
     },
     "extension_description": {
-        "message": "Provide comment filtering functionality for Xiaohongshu",
+        "message": "为小红书提供评论过滤功能",
         "description": "Description of what the extension does."
     }
 }
+

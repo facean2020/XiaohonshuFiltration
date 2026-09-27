@@ -25,6 +25,11 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        guard let webView else {
+            assertionFailure("The ViewController webView outlet is not connected.")
+            return
+        }
+
         self.webView.navigationDelegate = self
 
 #if os(iOS)
@@ -33,7 +38,21 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
 
         self.webView.configuration.userContentController.add(self, name: "controller")
 
-        self.webView.loadFileURL(Bundle.main.url(forResource: "Main", withExtension: "html")!, allowingReadAccessTo: Bundle.main.resourceURL!)
+        guard let mainURL = Bundle.main.url(forResource: "Main", withExtension: "html"),
+              let resourceURL = Bundle.main.resourceURL else {
+            assertionFailure("Main.html is missing from the app bundle.")
+            return
+        }
+
+        self.webView.loadFileURL(mainURL, allowingReadAccessTo: resourceURL)
+    }
+
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        NSLog("Failed to load the app guide: %@", error.localizedDescription)
+    }
+
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        NSLog("Failed to start loading the app guide: %@", error.localizedDescription)
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -61,7 +80,7 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 #if os(macOS)
-        if (message.body as! String != "open-preferences") {
+        guard let command = message.body as? String, command == "open-preferences" else {
             return
         }
 

@@ -2,10 +2,47 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="popup.css">
     <script type="module" src="popup.js"></script>
 </head>
 <body>
-    <strong>Hello World!</strong>
+    <main class="settings" aria-labelledby="title">
+        <header class="header">
+            <img class="app-mark" src="images/icon-128.png" alt="">
+            <div>
+                <p class="eyebrow">COMMENT FILTER</p>
+                <h1 id="title">小红书评论过滤</h1>
+            </div>
+        </header>
+
+        <section class="section" aria-labelledby="filter-title">
+            <div class="section-heading">
+                <div>
+                    <h2 id="filter-title">过滤规则</h2>
+                    <p>隐藏包含指定关键词的评论</p>
+                </div>
+                <label class="switch">
+                    <input id="key-matching" type="checkbox">
+                    <span class="switch-track"></span>
+                    <span class="visually-hidden">启用关键词过滤</span>
+                </label>
+            </div>
+
+            <form id="keyword-form" class="keyword-form">
+                <label class="visually-hidden" for="keyword-input">添加关键词</label>
+                <input id="keyword-input" type="text" maxlength="40" placeholder="添加关键词" autocomplete="off">
+                <button type="submit" class="add-button" aria-label="添加关键词">+</button>
+            </form>
+            <div id="keyword-list" class="keyword-list" aria-live="polite"></div>
+            <p id="empty-state" class="empty-state">还没有添加关键词</p>
+        </section>
+
+        <footer class="footer">
+            <span id="save-status" role="status">设置会自动保存</span>
+            <button id="options-button" type="button" class="text-button">更多设置</button>
+            <button id="clear-button" type="button" class="text-button">清空关键词</button>
+        </footer>
+    </main>
 </body>
 </html>

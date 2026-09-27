@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="option_page.css">
+	<script type="module" src="option_page.js"></script>
+</head>
+<body>
+	<main class="settings" aria-labelledby="title">
+		<header class="header">
+			<img class="app-mark" src="../images/icon-128.png" alt="">
+			<div>
+				<p class="eyebrow">COMMENT FILTER</p>
+				<h1 id="title">小红书评论过滤设置</h1>
+			</div>
+		</header>
+
+		<section class="section" aria-labelledby="filter-title">
+			<div class="section-heading">
+				<div>
+					<h2 id="filter-title">过滤规则</h2>
+					<p>隐藏包含指定关键词的评论</p>
+				</div>
+				<label class="switch">
+					<input id="key-matching" type="checkbox">
+					<span class="switch-track"></span>
+					<span class="visually-hidden">启用关键词过滤</span>
+				</label>
+			</div>
+			<form id="keyword-form" class="keyword-form">
+				<label class="visually-hidden" for="keyword-input">添加关键词</label>
+				<input id="keyword-input" type="text" maxlength="40" placeholder="添加关键词" autocomplete="off">
+				<button type="submit" class="add-button" aria-label="添加关键词">+</button>
+			</form>
+			<div id="keyword-list" class="keyword-list" aria-live="polite"></div>
+			<p id="empty-state" class="empty-state">还没有添加关键词</p>
+		</section>
+
+		<section class="section secondary-section" aria-labelledby="advanced-title">
+			<div class="setting-row">
+				<div>
+					<h2 id="advanced-title">模糊匹配</h2>
+					<p>使用相似表达进行过滤</p>
+				</div>
+				<label class="switch">
+					<input id="fuzzy-matching" type="checkbox">
+					<span class="switch-track"></span>
+					<span class="visually-hidden">启用模糊匹配</span>
+				</label>
+			</div>
+			<form id="fuzzy-rule-form" class="keyword-form">
+				<label class="visually-hidden" for="fuzzy-rule-input">添加模糊匹配规则</label>
+				<input id="fuzzy-rule-input" type="text" maxlength="120" placeholder="例如：广告、引流、恶意攻击" autocomplete="off">
+				<button type="submit" class="add-button" aria-label="添加模糊匹配规则">+</button>
+			</form>
+			<div id="fuzzy-rule-list" class="keyword-list" aria-live="polite"></div>
+			<p id="fuzzy-rule-empty" class="empty-state">还没有添加模糊匹配规则</p>
+		</section>
+
+		<section class="section secondary-section" aria-labelledby="model-title">
+			<div class="setting-row">
+				<div>
+					<h2 id="model-title">模型配置</h2>
+					<p>选择用于模糊匹配的模型</p>
+				</div>
+			</div>
+			<label class="field-label" for="model-type">模型类型</label>
+			<select id="model-type" class="field-input">
+				<option value="">未配置</option>
+				<option value="llm_openai">OpenAI 兼容接口</option>
+				<option value="jev">JEV</option>
+			</select>
+			<div id="connection-fields" class="connection-fields">
+				<label class="field-label" for="model">Model</label>
+				<input id="model" class="field-input" type="text" autocomplete="off" placeholder="例如 gpt-4o-mini">
+				<label class="field-label" for="api-key">API Key</label>
+				<input id="api-key" class="field-input" type="password" autocomplete="off" placeholder="输入 API Key">
+				<label class="field-label" for="provider-url">Provider URL</label>
+				<input id="provider-url" class="field-input" type="url" autocomplete="off" placeholder="https://api.example.com/v1">
+			</div>
+			<button id="model-save-button" type="button" class="save-button">保存模型配置</button>
+			<p id="model-help" class="notice" role="status">未配置模型，模糊匹配不会发起请求</p>
+		</section>
+
+		<section class="section secondary-section" aria-labelledby="debug-title">
+			<div class="setting-row">
+				<div>
+					<h2 id="debug-title">调试标记</h2>
+					<p>标记命中关键词的评论，不隐藏它们</p>
+				</div>
+				<label class="switch">
+					<input id="debug-mode" type="checkbox">
+					<span class="switch-track"></span>
+					<span class="visually-hidden">启用调试标记</span>
+				</label>
+			</div>
+		</section>
+
+		<footer class="footer">
+			<span id="save-status" role="status">设置会自动保存</span>
+			<button id="clear-button" type="button" class="text-button">清空关键词</button>
+		</footer>
+	</main>
+</body>
+</html>

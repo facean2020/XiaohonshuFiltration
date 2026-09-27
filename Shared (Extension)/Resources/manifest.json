@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "default_locale": "en",
+    "default_locale": "cn",
 
     "name": "__MSG_extension_name__",
     "description": "__MSG_extension_description__",
@@ -20,8 +20,18 @@
     },
 
     "content_scripts": [{
-        "js": [ "content.js" ],
-        "matches": [ "*://example.com/*" ]
+        "js": [
+            "fuzzyAdapterBase.js",
+            "judge.js",
+            "filiter.js",
+            "comment_scanner.js",
+            "page_detector.js",
+            "content.js"
+        ],
+        "matches": [
+            "https://www.xiaohongshu.com/*",
+            "https://xiaohongshu.com/*"
+        ]
     }],
 
     "action": {
@@ -29,5 +39,15 @@
         "default_icon": "images/toolbar-icon.svg"
     },
 
-    "permissions": [ ]
+    "options_ui": {
+        "page": "option_page.html",
+        "open_in_tab": true
+    },
+
+    "permissions": [ "storage", "scripting" ],
+
+    "host_permissions": [
+        "https://www.xiaohongshu.com/*",
+        "https://xiaohongshu.com/*"
+    ]
 }
