@@ -125,9 +125,7 @@
 		AB2EFBC030643116003A23FB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AB2EFBBF30643116003A23FB /* XiaohonshuFiltration.app */,
 				AB2EFBD130643116003A23FB /* XiaohonshuFiltration.app */,
-				AB2EFBDC30643116003A23FB /* XiaohonshuFiltration Extension.appex */,
 				AB2EFBE630643116003A23FB /* XiaohonshuFiltration Extension.appex */,
 			);
 			name = Products;
